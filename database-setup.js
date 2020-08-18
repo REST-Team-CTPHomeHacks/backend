@@ -1,15 +1,15 @@
-const promise = require('bluebird')    // Promise library will be bluebird
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var promise = require('bluebird'); // Promise library will be bluebird
 // Set our promise library to the bluebird package above
-const options = {
+var options = {
     promiseLib: promise
-}
-
-const pgp = require('pg-promise')(options)    // Initialize pg-promise using our promise library
-const connectionString = require('./connectionString.json')    // Load in the connection string we made
-const db = pgp(connectionString)    // Initialize our database with the connection string
-
+};
+var pgp = require('pg-promise')(options); // Initialize pg-promise using our promise library
+var connectionString = require('./connectionString.json'); // Load in the connection string we made
+var db = pgp(connectionString); // Initialize our database with the connection string
 // Export
-module.exports = {
-    db
-}
+// module.exports = {
+//     db
+// }
+exports.default = db;
