@@ -117,3 +117,9 @@ dist
 
 # connectionString
 connectionString.json
+
+# webstorm
+.idea
+
+# Ignore js files
+*.js
