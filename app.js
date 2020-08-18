@@ -1,7 +1,6 @@
-const express = require('express')
-const app = express()
-const db = require('./database-setup')
-const bodyParser = require('body-parser')
+const express = require('express')    // Express for handling RESTful API routes
+const app = express()    // Initialize "app" as express
+const db = require('./database-setup')    // Include our database-setup for making database queries
 
 // Checks if a date is a valid date
 function isValidDate(date) {
