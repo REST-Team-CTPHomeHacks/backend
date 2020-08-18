@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 // Function to recieve all activities per day for the given week.
 app.get('/activities/:date', (req, res) => {
-    let date = new Date(req.params.date)    // Creates a date object while inputting the date from parameters
+    let date = new Date(req.params.date)    // Creates a date object from a given date
 
     // If we send in a valid date, move on
     if (isValidDate(date)) {
