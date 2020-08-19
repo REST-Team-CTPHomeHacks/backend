@@ -1,5 +1,6 @@
 import Express from 'express'  // Express for handling RESTful API routes
 import db from './database-setup'  // Include our database-setup for making database queries
+import moment from 'moment'
 
 const app = Express()    // Initialize "app" as Express
 
@@ -25,14 +26,12 @@ app.get('/activities/:date', (req, res) => {
 
     // If we send in a valid date, move on
     if (isValidDate(date)) {
+        
         // Initializes start and end of week as blank date objects
-        let start_of_week = new Date()
-        let end_of_week = new Date()
+        let start_of_week = moment(date).startOf('week').toDate()
+        let end_of_week = moment(date).endOf('week').toDate()
 
-        // Makes the start of the week the sunday just before the date given
-        start_of_week.setDate(date.getDate() - date.getDay())
-
-        end_of_week.setDate(start_of_week.getDate() + 6)    // Makes the end of the week the saturday after the date given
+        console.log("Getting activities from " + start_of_week + " to " + end_of_week)
 
         // Queries the database for all activities made between the start and end of the week
         db.any("SELECT date, json_agg(activities) activities FROM activities WHERE date <= ${higherDate} AND date >= ${lowerDate} GROUP BY date", {
@@ -101,7 +100,7 @@ app.post('/push_activity', ({ body: { date, description, name, time_end, time_st
     //     activity_object.work = req.body.work
 
     // Insert our activity_object into the database
-    db.none("INSERT INTO activities (date, activity_name, description, time_start, time_end, is_work) VALUES (${date}, ${activity_name}, ${description}, ${time_start}, ${time_end}, ${work})", activity_object)
+    db.none("INSERT INTO activities (date, activity_name, description, time_start, time_end, is_work) VALUES (${date}, ${name}, ${description}, ${time_start}, ${time_end}, ${work})", activity_object)
     .then(() => {
         res.status(200)
         .json({
@@ -109,6 +108,7 @@ app.post('/push_activity', ({ body: { date, description, name, time_end, time_st
         })
     })
     .catch(err => {
+        console.log(err)
         res.status(500)
         .json({
             err
