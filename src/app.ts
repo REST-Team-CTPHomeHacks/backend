@@ -1,6 +1,7 @@
 import Express from 'express'  // Express for handling RESTful API routes
 import db from './database-setup'  // Include our database-setup for making database queries
 import moment from 'moment'
+import cors from 'cors'
 
 const app = Express()    // Initialize "app" as Express
 
@@ -12,6 +13,7 @@ function isValidDate(date: Date): boolean {
 // Allows body parsing for post requests
 app.use(Express.urlencoded())
 app.use(Express.json())
+app.use(cors())
 
 // Initial endpoint
 app.get('/', (req, res) => {
