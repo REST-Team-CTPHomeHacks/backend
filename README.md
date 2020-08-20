@@ -30,7 +30,7 @@ In the root directory, make a connectionString.json file, fill it with these con
 {
   "host": "localhost",
   "port": 5432,
-  "database": "your-database-name"
+  "database": "your-database-name",
   "user": "postgres",
   "password": "your-password-to-postgre"
 }
