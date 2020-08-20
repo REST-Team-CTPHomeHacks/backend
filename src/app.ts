@@ -81,7 +81,7 @@ app.post('/push_activity', ({ body: { date, description, name, time_end, time_st
         description: description || null,
         time_start: time_start || null,
         time_end: time_end || null,
-        work: work || null,
+        work: work,
     }
     // let validActivity = true    // Is set to false if our current activity is not valid
 
